@@ -1,0 +1,31 @@
+#!/bin/sh
+
+xsetroot -solid '#101010' &
+
+## Set startup volume
+pactl set-sink-volume 0 '20%' &
+
+## Disable beeps
+xset -b &
+
+## DPMS monitor setting (standby -> suspend -> off) (seconds)
+# I do not use screen “savers”, blank it after 5 minutes, suspend and
+# then go off after 5+5 minutes. THIS is screen saving.
+xset dpms 300 600 900 &
+
+## Set LCD brightness
+# The same story as with volume, backlight set to 90 % after start.
+xbacklight -set 90 &
+
+## Clipboard manager
+# Parcellite clipboard manager is widely used, and I love it for my
+# patches that strips whitespace. Go ahead, try it and enable this
+# feature in the preferences. Czech translation is totally wrong,
+# therefore I start it in English.
+parcellite &
+
+## OSD
+# dunst &
+
+##networking applet
+nm-applet &
