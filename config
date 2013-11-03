@@ -11,6 +11,8 @@
 
 set $mod Mod4
 
+exec xmodmap
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -29,9 +31,10 @@ floating_modifier $mod
 bindsym Control+Mod1+l exec i3-msg workspace 1 && i3lock -c 111111 -d
 
 # next/previous workspace
-bindsym Mod1+Tab focus right
-bindsym Mod1+Shift+Tab focus left
+bindsym Mod1+Tab workspace next
+bindsym Mod1+Shift+Tab workspace prev
 bindsym $mod+Tab workspace back_and_forth
+workspace_auto_back_and_forth yes
 
 # scratchpad
 bindsym $mod+m move scratchpad
@@ -58,7 +61,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+space exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -106,7 +109,7 @@ bindsym $mod+x layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+t focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -173,8 +176,9 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # workspace assignment (use "xprop")
-assign [class="^emacs$"] 1
-assign [class="^google-chrome$"] 2
+assign [class="google-chrome" instance="Google-chrome"] 3
+# assign [class="^emacs$"] 1
+# assign [class="^google-chrome$"] 2
 # assign [class="^URxvt$" instance="^mail$"] 4
 # assign [class="^Xchat$"] 5
 # assign [class="^Rednotebook$"] 6
@@ -182,8 +186,11 @@ assign [class="^google-chrome$"] 2
 # assign [title="Lingea Lexicon 5$"] 8
 
 # custom window settings
+for_window [class="emacs"] move 1
+for_window [class="google-chrome" instance="Google-chrome"] move 2
+# for_window [title="(?i)Chromium" instance=".*"] floating enable
+for_window [class="I3-exit" instance="i3-exit"] floating enable
 # for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
-# for_window [class="^Google-chrome$"] border none
 # for_window [title="Lingea Lexicon 5$"] border none
 
 # before autostart
@@ -191,35 +198,36 @@ assign [class="^google-chrome$"] 2
 # exec urxvt -name scratchpad -e bash
 
 # autostart
-exec emacs
+# exec emacs
 exec google-chrome
 exec dropbox start
 exec SpiderOak
-exec synapse
-exec dropbox start
+# exec synapse
+exec btsync
 # exec gnome-settings-deamon ???
 
 
-# set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-# mode "$mode_system" {
-#     bindsym l exec --no-startup-id i3exit lock, mode "default"
-#     bindsym e exec --no-startup-id i3exit logout, mode "default"
-#     bindsym s exec --no-startup-id i3exit suspend, mode "default"
-#     bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-#     bindsym r exec --no-startup-id i3exit reboot, mode "default"
-#     bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"  
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id /home/michieljoris/.i3/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id /home/michieljoris/.i3/i3exit logout, mode "default"
+    bindsym s exec --no-startup-id /home/michieljoris/.i3/i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id /home/michieljoris/.i3/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id /home/michieljoris/.i3/i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id /home/michieljoris/.i3/i3exit shutdown, mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
-#     # back to normal: Enter or Escape
-#     bindsym Return mode "default"
-#     bindsym Escape mode "default"
-# }
 
 
 # bindsym $mod+Insert exec --no-startup-id i3exit suspend
 
-# bindsym $mod+Insert mode "$mode_system"
-bindsym $mod+Insert exec ~/.i3/i3-exit
-for_window [class="I3-exit" instance="i3-exit"] floating enable
+# bindsym $mod+Insert Mode "$mode_system"
+bindsym $mod+Shift+p mode "$mode_system"
+# bindsym $mod+Insert exec /home/michieljoris/.i3/i3-exit
+
 
 # bindsym $mod+q exec --no-startup-id i3exit suspend, mode "default"
 exec ~/.i3/autostart
@@ -241,7 +249,7 @@ bar {
 	tray_output primary
 	mode hide
 	modifier $mod
-	position top
+	position bottom
 }
 
 
