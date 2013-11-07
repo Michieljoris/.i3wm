@@ -239,7 +239,8 @@ exec ~/.i3/autostart
 # finds out, if available)
 bar {
 	# https://github.com/ultrabug/py3status
-	status_command py3status -c ~/.i3/i3status.conf
+	status_command py3status -c ~/.i3/i3status.conf.desktop
+	# status_command py3status -c ~/.i3/i3status.conf.laptop
 	
         # status_command i3status
 

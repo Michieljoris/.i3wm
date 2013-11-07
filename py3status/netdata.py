@@ -47,7 +47,7 @@ class GetData:
     def __init__(self):
         # You can change it to another interface.
         # It'll be used for grabbing net interface data.
-        self.net_interface = 'wlan0'
+        self.net_interface = 'eth0'
 
     def execCMD(self, cmd, arg):
         """Take a system command and its argument, then return the result.
