@@ -1,0 +1,12 @@
+ pip install py3status
+ sudo apt-get install i3status
+ sudo cp i3status.conf /etc
+ sudo apt-get install python-pip
+ sudo pip install py3status
+ sudo apt-get install i3lock
+ i3status
+py3status
+
+#for backlight
+sudo apt-get install xbacklight
+
