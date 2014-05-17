@@ -145,6 +145,18 @@ bindsym $mod+Shift+8 move container to workspace 8;workspace 8
 bindsym $mod+Shift+9 move container to workspace 9;workspace 9
 bindsym $mod+Shift+0 move container to workspace 10;workspace 10
 
+workspace 1 output VGA-0
+workspace 2 output VGA-0
+workspace 3 output VGA-0
+workspace 4 output VGA-0
+workspace 5 output VGA-0
+workspace 5 output DVI-0
+workspace 6 output DVI-0
+workspace 7 output DVI-0
+workspace 8 output DVI-0
+workspace 9 output DVI-0
+workspace 0 output DVI-0
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -242,10 +254,10 @@ exec ~/.i3/autostart
 # finds out, if available)
 bar {
 	# https://github.com/ultrabug/py3status
-	status_command py3status -c ~/.i3/i3status.conf.desktop
+	# status_command py3status -c ~/.i3/i3status.conf.desktop
 	# status_command py3status -c ~/.i3/i3status.conf.laptop
 	
-        # status_command i3status
+        status_command i3status
 
 	# https://github.com/lee-/i3-bw or use bmon in a scratch terminal
 	# status_command /home/michieljoris/.i3/i3-bw 5 /sys/class/net/wlan0/statistics/rx_bytes /sys/class/net/wlan0/statistics/tx_bytes
