@@ -4,6 +4,8 @@
 # Should you change your keyboard layout somewhen, delete
 # this file and re-run i3-config-wizard(1).
 #
+# Make sure to install i3lock and xbacklight and i3status and
+# py3status, see install script in this dir.
 
 # i3 config file (v4)
 #
@@ -22,7 +24,7 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # chose a FreeType font, such as:
 # font pango:DejaVu Sans Mono 10
 
-bindsym $mod+b exec nautilus --no-desktop &
+bindsym $mod+b exec caja --no-desktop &
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -34,7 +36,7 @@ bindsym Control+Mod1+l exec i3-msg workspace 1 && i3lock -c 111111 -d
 bindsym Mod1+Tab workspace next
 bindsym Mod1+Shift+Tab workspace prev
 bindsym $mod+Tab workspace back_and_forth
-workspace_auto_back_and_forth yes
+# workspace_auto_back_and_forth yes
 
 # scratchpad
 bindsym $mod+m move scratchpad
@@ -42,7 +44,7 @@ bindsym $mod+n scratchpad show
 
 # pulse audio volume control
 bindcode 122 exec pactl set-sink-volume 0 -- '-10%'
-bindcode 123  exec pactl set-sink-volume 0 -- '+10%'
+bindcode 123  execpactl set-sink-volume 0 -- '+10%'
 bindcode 121  exec pactl set-sink-volume 0 0
 # bindcode XF86Launch1 exec /usr/bin/pactl play-sample that_was_easy
 bindcode 233 exec xbacklight -inc 20
@@ -59,6 +61,8 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
+
+focus_follows_mouse no
 
 # start dmenu (a program launcher)
 bindsym $mod+space exec dmenu_run
@@ -92,10 +96,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-# bindsym $mod+o split h
+bindsym $mod+o split horizontal
 
 # split in vertical orientation
-# bindsym $mod+e split v
+bindsym $mod+e split vertical
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -126,8 +130,7 @@ bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 6
-
+bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
@@ -199,11 +202,13 @@ for_window [class="I3-exit" instance="i3-exit"] floating enable
 
 # autostart
 # exec emacs
-exec google-chrome
+
+exec i3-sensible-terminal
 exec dropbox start
 exec SpiderOak
-# exec synapse
 exec btsync
+exec synapse -s
+exec sh disable-touchpad-while-typing.sh
 # exec gnome-settings-deamon ???
 
 
@@ -226,6 +231,8 @@ mode "$mode_system" {
 
 # bindsym $mod+Insert Mode "$mode_system"
 bindsym $mod+Shift+p mode "$mode_system"
+bindsym $mod+p exec /home/michieljoris/bin/touchpad-toggle.sh
+bindsym $mod+Shift+o exec samsung-tools --show-notify -c cycle
 # bindsym $mod+Insert exec /home/michieljoris/.i3/i3-exit
 
 
@@ -253,3 +260,5 @@ bar {
 }
 
 
+
+# install spideroak and dropbox and m4e
