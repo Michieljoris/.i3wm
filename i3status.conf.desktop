@@ -29,7 +29,7 @@ order += "time"
 
 cpu_temperature 0 {
         format = "%degrees °C"
-	max_threshold =70 
+	# max_threshold =70 
 #         path = "/sys/devices/platform/coretemp.0/temp1_input"
 }
 
