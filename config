@@ -24,7 +24,7 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # chose a FreeType font, such as:
 # font pango:DejaVu Sans Mono 10
 
-bindsym $mod+b exec caja --no-desktop &
+# bindsym $mod+b exec caja --no-desktop &
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -158,19 +158,18 @@ workspace 2 output VGA-0
 workspace 3 output VGA-0
 workspace 4 output VGA-0
 workspace 5 output VGA-0
-workspace 5 output DVI-0
 workspace 6 output DVI-0
 workspace 7 output DVI-0
 workspace 8 output DVI-0
 workspace 9 output DVI-0
-workspace 0 output DVI-0
+workspace 10 output DVI-0
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -194,12 +193,13 @@ mode "resize" {
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
+	bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
 # workspace assignment (use "xprop")
-assign [class="google-chrome" instance="Google-chrome"] 3
+# assign [class="google-chrome" instance="Google-chrome"] 3
 # assign [class="^emacs$"] 1
 # assign [class="^google-chrome$"] 2
 # assign [class="^URxvt$" instance="^mail$"] 4
@@ -274,7 +274,7 @@ bar {
 	# https://github.com/lee-/i3-bw or use bmon in a scratch terminal
 	# status_command /home/michieljoris/.i3/i3-bw 5 /sys/class/net/wlan0/statistics/rx_bytes /sys/class/net/wlan0/statistics/tx_bytes
 	
-	tray_output primary
+	tray_output VGA-0
 	mode hide
 	modifier $mod
 	position bottom
@@ -283,3 +283,46 @@ bar {
 
 
 # install spideroak and dropbox and m4e
+
+bindsym $mod+Shift+b exec i3-input -F 'mark %s' -P 'Mark name: '
+bindsym $mod+b exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+
+bindsym $mod+Shift+e [class="(?i)Emacs"] focus
+bindsym $mod+Shift+m [class="(?i)Chromium" title="FastMail"] focus
+bindsym $mod+Shift+s [class="(?i)SpaceFm"] focus
+
+mode "focused" {
+
+                # hardcoded focus keybindings
+                bindsym e [class="(?i)Emacs"] focus
+                bindsym m [class="(?i)Chromium" title="FastMail"] focus
+                # bindsym m [class="(?i)thunderbird"] focus
+                # bindsym f [class="(?i)terminal" title="mc"] focus
+                # bindsym z [class="(?i)zathura"] focus
+
+                # keybindings for marking and jumping to clients
+                bindsym a exec i3-input -F 'mark %s' -P 'Mark name: '
+                bindsym g exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+
+                # Assign marks to keys 1-5
+                bindsym Shift+1 mark mark1
+                bindsym Shift+2 mark mark2
+                bindsym Shift+3 mark mark3
+                bindsym Shift+4 mark mark4
+                bindsym Shift+5 mark mark5
+
+                # Jump to clients marked 1-5
+                bindsym 1 [con_mark="mark1"] focus
+                bindsym 2 [con_mark="mark2"] focus
+                bindsym 3 [con_mark="mark3"] focus
+                bindsym 4 [con_mark="mark4"] focus
+                bindsym 5 [con_mark="mark5"] focus
+
+                # Exit to the default mode
+                bindsym Return mode "default"
+                bindsym Escape mode "default"
+                bindsym $mod+q mode "default"
+                bindsym q mode "default"
+}
+
+# bindsym $mod+q mode "focused"
