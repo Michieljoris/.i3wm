@@ -290,6 +290,7 @@ bindsym $mod+b exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 bindsym $mod+Shift+e [class="(?i)Emacs"] focus
 bindsym $mod+Shift+m [class="(?i)Chromium" title="FastMail"] focus
 bindsym $mod+Shift+s [class="(?i)SpaceFm"] focus
+bindsym $mod+Shift+z [class="(?i)Zeal"] focus
 
 mode "focused" {
 
