@@ -162,7 +162,8 @@ workspace 6 output DVI-0
 workspace 7 output DVI-0
 workspace 8 output DVI-0
 workspace 9 output DVI-0
-workspace 10 output DVI-0
+# workspace 10 output DVI-0
+workspace 10 output HDMI1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -274,6 +275,7 @@ bar {
 	# https://github.com/lee-/i3-bw or use bmon in a scratch terminal
 	# status_command /home/michieljoris/.i3/i3-bw 5 /sys/class/net/wlan0/statistics/rx_bytes /sys/class/net/wlan0/statistics/tx_bytes
 	
+	# tray_output LVDS1 
 	tray_output primary
 	mode hide
 	modifier $mod
