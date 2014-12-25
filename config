@@ -231,6 +231,10 @@ exec btsync
 exec synapse -s
 exec sh disable-touchpad-while-typing.sh
 # exec gnome-settings-deamon ???
+# http://blog.bstpierre.org/making-caps-lock-an-additional-control-in-xwindows?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+TheDailyBuild+(The+Daily+Build)
+# https://wiki.archlinux.org/index.php/xmodmap
+# exec_always xmodmap ~/bin/xmodmap.swap.conf
+exec_always ~/bin/nocaps 
 
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
